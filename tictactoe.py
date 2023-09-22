@@ -18,6 +18,13 @@ class TicTacToe:
         return self.board
 
     def make_move(self, position):
+        if not isinstance(position, int):
+            raise TypeError("Enter a number!")
+        if not 1 <= position <= 9:
+            raise IndexError("Enter a number in range [1, 9]")
+        if self.board[position - 1] != ' ':
+            raise ValueError("Invalid move!")
+
         self.board[position-1] = self.current_player
         self.current_player = 'O' if self.current_player == 'X' else 'X'
 
