@@ -26,7 +26,21 @@ class TicTacToe:
             raise ValueError("Invalid move!")
 
         self.board[position-1] = self.current_player
+        self.check_winner()
         self.current_player = 'O' if self.current_player == 'X' else 'X'
+
+    def check_winner(self):
+        winning_combinations = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ]
+
+        for combination in winning_combinations:
+            a, b, c = combination
+            if self.board[a] == self.board[b] == self.board[c] != ' ':
+                self.winner = self.current_player
+                break
 
     def print_board(self):
         for i in range(3):

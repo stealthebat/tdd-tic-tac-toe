@@ -27,6 +27,30 @@ class TicTacToeTest(unittest.TestCase):
             game.make_move(1)
             game.make_move(1)
 
+    def test_game_win(self):
+        game = TicTacToe()
+        game.make_move(1)
+        game.make_move(4)
+        game.make_move(2)
+        game.make_move(5)
+        game.make_move(3)
+        self.assertTrue(game.is_game_over())
+        self.assertEqual(game.get_winner(), 'X')
+
+    def test_game_tie(self):
+        game = TicTacToe()
+        game.make_move(1)
+        game.make_move(4)
+        game.make_move(7)
+        game.make_move(5)
+        game.make_move(2)
+        game.make_move(8)
+        game.make_move(6)
+        game.make_move(3)
+        game.make_move(9)
+        self.assertTrue(game.is_game_over())
+        self.assertIsNone(game.get_winner())
+
 
 if __name__ == '__main__':
     unittest.main()
