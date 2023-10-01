@@ -66,6 +66,7 @@ def main():
         print("Winner:", game.get_winner() + "!")
     else:
         print("Draw!")
+    input()
 
 
 if __name__ == '__main__':
