@@ -17,11 +17,17 @@ class TicTacToe:
     def get_board(self):
         return self.board
 
+    def print_board(self):
+        for i in range(3):
+            print(*self.board[i*3:3*i+3])
+
     def make_move(self, position):
-        if not isinstance(position, int):
-            raise TypeError("Enter a number!")
+        try:
+            position = int(position)
+        except ValueError as e:
+            raise ValueError("Enter a number!") from e
         if not 1 <= position <= 9:
-            raise IndexError("Enter a number in range [1, 9]")
+            raise IndexError("Enter a number in range [1, 9]!")
         if self.board[position - 1] != '_':
             raise ValueError("Invalid move!")
 
@@ -42,20 +48,16 @@ class TicTacToe:
                 self.winner = self.current_player
                 break
 
-    def print_board(self):
-        for i in range(3):
-            print(*self.board[i*3:3*i+3])
-
 
 def main():
     game = TicTacToe()
     while not game.is_game_over():
         print("Turn:", game.get_current_player())
-        move = int(input("Input cell in range [1; 9]: "))
         try:
+            move = input("Input a cell number in range [1; 9]: ")
             game.make_move(move)
-        except (TypeError, IndexError, ValueError):
-            print("Invalid move")
+        except (IndexError, ValueError) as e:
+            print(str(e))
         print("Board:")
         game.print_board()
         print()

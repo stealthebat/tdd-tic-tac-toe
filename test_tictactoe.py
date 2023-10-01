@@ -19,7 +19,7 @@ class TicTacToeTest(unittest.TestCase):
 
     def test_invalid_move(self):
         game = TicTacToe()
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             game.make_move('abc')
         with self.assertRaises(IndexError):
             game.make_move(10)
